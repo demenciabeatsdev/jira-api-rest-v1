@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "448f414a-d13b-4670-9cea-f2ee965f5807",
+		"name": "JIRA API REST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26378342"
+	},
+	"item": [
+		{
+			"name": "Fields",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/fields",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fields"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Issues",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Filtered Fields",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/filtered-fields/jql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"filtered-fields",
+						"jql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
