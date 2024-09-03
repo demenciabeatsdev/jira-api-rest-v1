@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jira API Consumer</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Table CSS -->
+    <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+    <style>
+        .table-container {
+            margin-top: 30px;
+        }
+        .bootstrap-table .fixed-table-container {
+            border: none; /* Quita los bordes adicionales */
+        }
+        .table {
+            table-layout: auto; /* Cambiar a 'auto' para un mejor ajuste */
+            width: 100%;
+        }
+        th, td {
+            text-align: center; /* Alinear texto al centro */
+            white-space: nowrap; /* Evitar el wrap de los textos */
+        }
+        .bootstrap-table .table {
+            width: auto; /* Ajuste automático del ancho de la tabla */
+        }
+        .color-cell {
+            font-weight: bold; /* Para resaltar las celdas con color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Jira API Consumer</h1>
+
+        <!-- Formulario para ingresar JQL -->
+        <div class="form-group">
+            <label for="jqlInput">JQL:</label>
+            <input type="text" id="jqlInput" class="form-control" placeholder="Enter JQL query">
+        </div>
+        <button class="btn btn-primary" onclick="fetchIssues()">Fetch Issues</button>
+
+        <!-- Tabla para mostrar los resultados con paginación -->
+        <div class="table-container">
+            <h3>Issues</h3>
+            <table class="table table-bordered" 
+                   id="issuesTable" 
+                   data-toggle="table" 
+                   data-pagination="true" 
+                   data-page-size="5" 
+                   data-page-list="[5, 10, 20]"
+                   data-search="true"
+                   data-show-columns="true"
+                   data-show-toggle="true">
+                <thead>
+                    <tr>
+                        <th data-field="key">Key</th>
+                        <th data-field="summary">Summary</th>
+                        <th data-field="status">Status</th>
+                        <th data-field="labels">Labels</th>
+                        <th data-field="parent">Parent</th>
+                        <th data-field="reporter">Reporter</th>
+                        <th data-field="storyPoints">Story Points</th>
+                        <th data-field="qa">QA</th>
+                        <th data-field="startDate">Start date</th>
+                        <th data-field="analysisStartDate">Analysis start date</th>
+                        <th data-field="analysisEndDate">Analysis end date</th>
+                        <th data-field="actualStart">Actual start</th>
+                        <th data-field="devEndDate">Dev end date</th>
+                        <th data-field="lastDevEndDate">Last dev end date</th>
+                        <th data-field="estimatedDevEndDate" data-formatter="colorFormatter">Estimated dev end date</th>
+                        <th data-field="qaStartDate">QA start date</th>
+                        <th data-field="actualEnd">Actual end</th>
+                        <th data-field="prodStartDate">Prod start date</th>
+                        <th data-field="sprint">Sprint</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap y scripts de JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Table JS -->
+    <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+
+    <!-- Script separado para manejar las solicitudes con defer -->
+    <script src="script.js" defer></script>
+
+    <!-- Formateador de celdas de color para la columna "Estimated dev end date" -->
+    <script>
+        function colorFormatter(value, row, index) {
+            const color = row.estimatedDevEndDateColor || 'white';
+            return `<div class="color-cell" style="background-color: ${color};">${value}</div>`;
+        }
+    </script>
+</body>
+</html>
